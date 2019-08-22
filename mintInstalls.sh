@@ -9,6 +9,8 @@ set -e
 # log in to firefox and show bookmarks toolbar, remove pocket, set default search to duckduckgo.
 # deal with passwording: https://stackoverflow.com/a/11955369
 
+read -p "Keep it simple, or try to install yEd? [simple/yed] " YED
+
 sudo -s -- <<EOF
 # enter password
 timeshift --create --comments "raw install"
@@ -34,7 +36,9 @@ apt install idle-python3.6 -y
 apt install python-pip -y
 pip install flake8
 apt install default-jdk -y
+apt install inkscape -y
 snap install slack --classic
+snap install discord
 
 # Install Vim
 apt install neovim -y
@@ -47,6 +51,11 @@ snap install code --classic
 apt install texlive-latex-recommended texlive-latex-base texlive-latex-extra texmaker -y
 timeshift --create --comments "bulk software install"
 EOF
+
+# Hacky lightweight yEd install
+if [[ ${YED} = "yed" ]]; then
+	bash install_yEd.sh
+fi
 
 # Add Snap packages to PATH
 echo 'export PATH=$PATH:/snap/bin' >> ~/.bashrc
