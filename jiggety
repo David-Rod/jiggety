@@ -1,17 +1,13 @@
 #!/bin/bash
 # Configure linuxMint - backups, workspaces, tiling, hot corners, icons on panel
 
-read -p 'Configure Cinnamon, Terminal, bash, git, and vim? [y/n] ' CONFIG
-read -p 'Add background images and filter out the bad ones? [y/n]' BGROUND
+read -p 'Configure bash, git, and vim? [y/n] ' CONFIG
 read -p 'Install all standard productivity software? [y/n] ' INSTALL
 read -p 'Install Miniconda and QIIME 2? [y/n] ' QIIME
 read -p 'Clone all of your github repos? [y/n] ' SCRAPE_GH
 
 if [[ "$CONFIG" == "y" ]]; then
 # TODO: overwrite .bashrc with dotfile rather than editing dotfile (for idempotence)
-	
-	# Configure cinnamon (sounds, bluetooth, etc)
-	bash ~/src/jiggety/cinnamonConfig.sh
 	
 	# Overwrite awful Gnome Terminal defaults
 	bash ~/src/jiggety/terminalconfig.sh
@@ -41,20 +37,9 @@ if [[ "$CONFIG" == "y" ]]; then
 	cat ~/src/jiggety/dotfiles/init.vim >> ~/.config/nvim/init.vim
 fi
 
-if [[ "$BGROUND" == "y" ]]; then
-	bash ~/src/jiggety/backgroundSlideshow.sh
-fi
-
 if [[ "$INSTALL" == "y" ]]; then
 
-	read -p 'Are you provisioning Mint or openSUSE? (mint/open)? ' DISTRO
-	if [[ "$DISTRO" == "mint" ]]; then
-		bash ~/src/jiggety/mintInstalls.sh
-	fi
-
-	if [[ "$DISTRO" == "open" ]]; then
-		bash ~/src/jiggety/suseInstalls.sh
-	fi
+	bash ~/src/jiggety/mintInstalls.sh
 fi
 
 if [[ "$QIIME" == "y" ]]; then

@@ -13,14 +13,11 @@ read -p "Keep it simple, or try to install yEd? [simple/yed] " YED
 
 sudo -s -- <<EOF
 # enter password
-timeshift --create --comments "raw install"
 apt update
 apt upgrade -y
 apt dist-upgrade -y
 apt autoremove
 apt autoclean -y
-# save point
-timeshift --create --comments "updates/ugrades packages"
 
 # Required dependencies:
 apt install snapd
@@ -46,10 +43,6 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.viM
 
 # Install VSCode
 snap install code --classic
-
-# Install LaTeX
-apt install texlive-latex-recommended texlive-latex-base texlive-latex-extra texmaker -y
-timeshift --create --comments "bulk software install"
 EOF
 
 # Hacky lightweight yEd install
